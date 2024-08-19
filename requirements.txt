@@ -1,0 +1,14 @@
+langchain
+langchain-core
+python-dotenv
+streamlit
+langchain-community
+bs4
+pypdf
+groq
+selenium
+beautifulsoup4
+langchain-groq
+
+langchain-google-genai
+google-generativeai
