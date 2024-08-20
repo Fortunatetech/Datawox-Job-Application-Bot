@@ -38,13 +38,30 @@ try:
             job_posted_date_element = job.find_element(By.CSS_SELECTOR, 'small[data-test="job-pubilshed-date"]')
             job_posted_date = job_posted_date_element.text if job_posted_date_element else "Date not available"
 
-           
+            # Extract client total spent
+
+            try:
+                rating_element = job.find_element(By.CSS_SELECTOR, 'div.air3-rating-value-text')
+                rating = rating_element.text.strip()
+            except:
+                rating = "Rating not available"
+            
+            # Extract client rating
+            try:
+                total_spent_element = job.find_element(By.CSS_SELECTOR, 'li[data-test="total-spent"] strong')
+                total_spent = total_spent_element.text
+            except:
+                total_spent = "Total spent not available"
+
+
             # Write job details to file
             file.write(f"Title: {title}\n")
             file.write(f"URL: {job_url}\n")
             file.write(f"Description: {description}\n")
             file.write(f"Skills: {', '.join(skills)}\n")
             file.write(f"Job Posted Date: {job_posted_date}\n")
+            file.write(f"Client Total Spent: {total_spent}\n")
+            file.write(f"Client Rating: {rating}\n")
             file.write("-" * 40 + "\n")
 
 finally:

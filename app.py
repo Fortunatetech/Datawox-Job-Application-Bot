@@ -3,15 +3,17 @@ import streamlit as st
 import subprocess
 import time
 from groq import Groq
+from dotenv import load_dotenv
 
+load_dotenv()
+KEY = os.getenv("GROQ_API_KEY")
 
-os.environ['GROQ_API_KEY'] = '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'
 
 st.set_page_config(layout='centered', page_title = "Datawox Job Matcher" )
 st.title("Datawox Job Matcher")
 
 client = Groq(
-            api_key=os.environ.get("GROQ_API_KEY"),
+            api_key=KEY,
         )
 
 def generate_review(profile, job_data):
