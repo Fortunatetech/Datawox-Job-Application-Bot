@@ -59,7 +59,7 @@ def generate_review(profile, job_data):
         st.error(f"Error generating review: {e}")
         return None
     
-def generate_coverLeter(review_output, user_input, data_profile):
+def generate_coverLeter(job_pool_data, user_input, data_profile):
     try:
         response = client.chat.completions.create(
             messages=[
@@ -73,7 +73,7 @@ def generate_coverLeter(review_output, user_input, data_profile):
                     ensure the content of the cover letter is in human tone.
                     Ensure you use first person plural
 
-                    review output: {review_output}
+                    review output: {data_profile}
                     User input: {user_input}
                     """,
                 },
@@ -101,9 +101,9 @@ with col1:
         # Load the contents of the job_pool_database.txt and Datawox_upwork_profile_database.txt
         with st.spinner('Analysing Datawox and job similarites...'):
             try:
-                with open("job_pool_database.txt", "r") as job_file:
+                with open("job_pool_database.txt", "r", encoding="utf-8") as job_file:
                     job_pool_data = job_file.read()
-                with open("Datawox_upwork_profile_database.txt", "r") as profile_file:
+                with open("Datawox_upwork_profile_database.txt", "r", encoding="ISO-8859-1") as profile_file:
                     profile_data = profile_file.read()
                 
                     review_output = generate_review(profile_data, job_pool_data)           
@@ -117,9 +117,9 @@ with col1:
             st.success("Job bot task completed!")  
 
 with col2:
-    with open("job_pool_database.txt", "r") as job_file:
+    with open("job_pool_database.txt", "r", encoding="utf-8") as job_file:
                     job_pool_data = job_file.read()
-    with open("Datawox_upwork_profile_database.txt", "r") as profile_file:
+    with open("Datawox_upwork_profile_database.txt", "r", encoding="ISO-8859-1") as profile_file:
         profile_data = profile_file.read()
     
         review_output = generate_review(profile_data, job_pool_data)
