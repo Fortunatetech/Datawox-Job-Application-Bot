@@ -2,6 +2,7 @@ import os
 import logging
 from selenium import webdriver
 #from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -11,10 +12,23 @@ from selenium.common.exceptions import NoSuchElementException
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+import chromedriver_autoinstaller
+
+chromedriver_autoinstaller.install()  # Automatically installs the correct version of ChromeDriver
+
+
 def setup_driver():
-    """Set up and return the WebDriver."""
+    """Set up and return the WebDriver with headless Chrome."""
     logging.info("Setting up the WebDriver.")
-    driver = webdriver.Chrome()
+
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+    
+    # Set up the ChromeDriver
+    driver = webdriver.Chrome(options=chrome_options)
     return driver
 
 def extract_job_details(job):

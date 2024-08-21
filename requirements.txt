@@ -10,6 +10,6 @@ selenium
 beautifulsoup4
 langchain-groq
 fake-useragent
-
+chromedriver-autoinstaller
 langchain-google-genai
 google-generativeai
