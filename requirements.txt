@@ -9,6 +9,7 @@ groq
 selenium
 beautifulsoup4
 langchain-groq
+fake-useragent
 
 langchain-google-genai
 google-generativeai
